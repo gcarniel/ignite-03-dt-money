@@ -45,7 +45,7 @@ export const Content = styled(Dialog.Content)`
       height: 58px;
       border-radius: 6px;
       background: ${(props) => props.theme['green-500']};
-      color: ${(props) => props.theme['white']};
+      color: ${(props) => props.theme.white};
       font-weight: bold;
       padding: 0 1.25rem;
       border: none;
@@ -74,7 +74,7 @@ export const CloseButton = styled(Dialog.Close)`
   background: transparent;
   border: 0;
   cursor: pointer;
-  color: ${(props) => props.theme['gray-500']}; ;
+  color: ${(props) => props.theme['gray-500']};
 `
 
 export const TransactionType = styled(RadioGroup.Root)`
@@ -120,7 +120,7 @@ export const TransactionTypeButton = styled(
         ? props.theme['green-500']
         : props.theme['red-500']};
 
-    color: ${(p) => p.theme['white']};
+    color: ${(p) => p.theme.white};
 
     svg {
       color: ${(props) => props.theme.white};
