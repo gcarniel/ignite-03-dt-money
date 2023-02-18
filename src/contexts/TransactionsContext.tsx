@@ -11,6 +11,7 @@ export interface Transaction {
 
 interface TransactionsContextType {
   transactions: Transaction[]
+  fetchTransactions: (query?: string) => Promise<void>
 }
 
 interface TransactionsProviderProps {
@@ -22,7 +23,7 @@ export const TransactionContext = createContext({} as TransactionsContextType)
 export function TransactionsProvider({ children }: TransactionsProviderProps) {
   const [transactions, setTransactions] = useState<Transaction[]>([])
 
-  const getTransactions = async () => {
+  const fetchTransactions = async (query?: string) => {
     const response = await fetch('http://localhost:3333/transactions')
     const data = await response.json()
 
@@ -30,10 +31,10 @@ export function TransactionsProvider({ children }: TransactionsProviderProps) {
   }
 
   useEffect(() => {
-    getTransactions()
+    fetchTransactions()
   }, [])
   return (
-    <TransactionContext.Provider value={{ transactions }}>
+    <TransactionContext.Provider value={{ transactions, fetchTransactions }}>
       {children}
     </TransactionContext.Provider>
   )

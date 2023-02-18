@@ -1,9 +1,8 @@
-import { useContext, useEffect, useState } from 'react'
 import { Header } from '../../components/Header'
 import { Summary } from '../../components/Summary'
 import { useTransactions } from '../../hooks/useTransactions'
 import { dateFormatter, priceFormatter } from '../../utils/formatter'
-import { SearchForm } from '../Transactions/components/'
+import { SearchForm } from './components/SearchForm'
 import * as s from './styles'
 
 export function Transactions() {

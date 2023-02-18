@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 
 import * as s from './styles'
+import { useTransactions } from '../../../../hooks/useTransactions'
 
 const searchFormSchema = z.object({
   query: z.string(),
@@ -20,9 +21,11 @@ export function SearchForm() {
     resolver: zodResolver(searchFormSchema),
   })
 
+  const { fetchTransactions } = useTransactions()
+
   const handleSearchTransactios = async (data: SearchFormInputs) => {
-    await new Promise((resolve) => setTimeout(resolve, 2000))
     console.log(data)
+    await fetchTransactions(data.query)
   }
 
   return (
