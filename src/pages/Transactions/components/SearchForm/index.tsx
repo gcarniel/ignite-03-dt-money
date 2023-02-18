@@ -24,7 +24,6 @@ export function SearchForm() {
   const { fetchTransactions } = useTransactions()
 
   const handleSearchTransactios = async (data: SearchFormInputs) => {
-    console.log(data)
     await fetchTransactions(data.query)
   }
 

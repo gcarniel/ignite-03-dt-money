@@ -15,6 +15,22 @@
       "category": "alimentação",
       "price": 50,
       "createdAt": "2023-01-16T01:04:50.098Z"
+    },
+    {
+      "category": "comida",
+      "description": "marmita",
+      "price": 15,
+      "type": "outcome",
+      "createdAt": "2023-02-18T14:59:16.483Z",
+      "id": 3
+    },
+    {
+      "category": "alimentacao",
+      "description": "açaí",
+      "price": 25,
+      "type": "outcome",
+      "createdAt": "2023-02-18T15:08:25.973Z",
+      "id": 4
     }
   ]
 }

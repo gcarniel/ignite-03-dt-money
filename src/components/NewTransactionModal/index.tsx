@@ -3,6 +3,7 @@ import * as Dialog from '@radix-ui/react-dialog'
 import { ArrowCircleDown, ArrowCircleUp, X } from 'phosphor-react'
 import { Controller, useForm } from 'react-hook-form'
 import * as z from 'zod'
+import { useTransactions } from '../../hooks/useTransactions'
 
 import * as s from './styles'
 
@@ -21,21 +22,25 @@ export function NewTransactionModal() {
     register,
     handleSubmit,
     formState: { isSubmitting },
+    reset,
   } = useForm<NewTransactionsFormInputs>({
     resolver: zodResolver(newTransactionsFormSchema),
-    defaultValues: { type: 'income' },
+    defaultValues: { type: 'outcome' },
   })
+
+  const { createTransaction } = useTransactions()
 
   const handleCreateNewTransaction = async (
     data: NewTransactionsFormInputs,
   ) => {
-    await new Promise((resolve) => setTimeout(resolve, 2000))
-    console.log(data)
+    await createTransaction(data)
+    reset()
   }
   return (
     <Dialog.Portal>
+      {' '}
+      s
       <s.Overlay />
-
       <s.Content>
         <Dialog.Title>Nova Transação</Dialog.Title>
 
