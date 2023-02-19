@@ -63,6 +63,8 @@ interface PriceHighlightProps {
   variant: 'income' | 'outcome'
 }
 export const PriceHighlight = styled.span<PriceHighlightProps>`
+  display: inline-block;
+  width: max-content;
   color: ${(props) =>
     props.variant === 'income'
       ? props.theme['green-300']
