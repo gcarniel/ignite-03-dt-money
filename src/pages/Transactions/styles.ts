@@ -27,6 +27,36 @@ export const TransactionTable = styled.table`
       border-bottom-right-radius: 6px;
     }
   }
+
+  td > div {
+    display: flex;
+    gap: 0.5rem;
+  }
+`
+
+interface ActionButton {
+  variant: 'edit' | 'delete'
+}
+
+export const EditButton = styled.button<ActionButton>`
+  background-color: ${(props) => props.theme['gray-600']};
+  border: 0;
+  color: ${(props) => props.theme['gray-300']};
+  padding: 0.3rem;
+  border-radius: 999px;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    color: ${(props) =>
+      props.variant === 'edit'
+        ? props.theme['green-300']
+        : props.theme['red-300']};
+    background-color: ${(props) => props.theme['gray-900']};
+  }
 `
 
 interface PriceHighlightProps {

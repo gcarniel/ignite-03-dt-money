@@ -1,8 +1,10 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as Dialog from '@radix-ui/react-dialog'
 import { ArrowCircleDown, ArrowCircleUp, X } from 'phosphor-react'
+import { useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import * as z from 'zod'
+import { Transaction } from '../../contexts/TransactionsContext'
 import { useTransactions } from '../../hooks/useTransactions'
 
 import * as s from './styles'
@@ -12,20 +14,31 @@ const newTransactionsFormSchema = z.object({
   category: z.string(),
   price: z.number(),
   type: z.enum(['income', 'outcome']),
+  id: z.number().optional(),
+  createdAt: z.date().optional(),
 })
 
 type NewTransactionsFormInputs = z.infer<typeof newTransactionsFormSchema>
 
-export function NewTransactionModal() {
+interface NewTransactionModalProps {
+  transactionData?: Transaction
+}
+
+export function NewTransactionModal({
+  transactionData,
+}: NewTransactionModalProps) {
   const {
     control,
     register,
     handleSubmit,
     formState: { isSubmitting },
     reset,
+    setValue,
   } = useForm<NewTransactionsFormInputs>({
     resolver: zodResolver(newTransactionsFormSchema),
-    defaultValues: { type: 'outcome' },
+    defaultValues: {
+      type: 'outcome',
+    },
   })
 
   const { createTransaction } = useTransactions()
@@ -36,10 +49,24 @@ export function NewTransactionModal() {
     await createTransaction(data)
     reset()
   }
+
+  useEffect(() => {
+    if (transactionData?.id) {
+      setValue('category', transactionData?.category)
+      setValue('description', transactionData?.description)
+      setValue('price', transactionData?.price)
+      setValue('type', transactionData?.type)
+      setValue('id', transactionData?.id)
+      setValue(
+        'createdAt',
+        transactionData?.createdAt
+          ? new Date(transactionData?.createdAt)
+          : undefined,
+      )
+    }
+  }, [transactionData, setValue])
   return (
     <Dialog.Portal>
-      {' '}
-      s
       <s.Overlay />
       <s.Content>
         <Dialog.Title>Nova Transação</Dialog.Title>
